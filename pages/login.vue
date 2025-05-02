@@ -3,6 +3,7 @@ import axios from 'axios';
 import { ref } from 'vue';
 import MsgError from '~/components/common/MsgError.vue';
 import MsgSucess from '~/components/common/MsgSucess.vue';
+import Logo from '~/components/layout/Logo.vue';
 
 const user = ref<string>("");
 const password = ref<string>("");
@@ -12,6 +13,9 @@ const sucessMsg = ref<string>("");
 const handleLogin = async() => {
     if (!user.value || !password.value) {
         errorMsg.value = "Usuario e password são obrigatórios.";
+        setTimeout(() => {
+            errorMsg.value = ""
+        }, 3500);
     }
 
     try {
@@ -23,6 +27,9 @@ const handleLogin = async() => {
     const data = response.data;
     
     sucessMsg.value = data.msg
+    setTimeout(() => {
+        sucessMsg.value = ""
+    }, 3500);
     } catch (error) {
         
     }
@@ -32,14 +39,10 @@ const handleLogin = async() => {
 
 <template>
     <main
-        class="bg-[url(/img/fundo.jpeg)] w-screen h-screen bg-center bg-cover bg-no-repeat flex flex-col items-center justify-evelyn">
-        <figure class="w-[80%] h-[30vh] overflow-hidden md:w-[50%]">
-            <img src="/img/logo.png"
-                alt="uma foto de uma caveira com cabelo penteado  duas navalhas formando um x e  duas tesouras, com o testo barbearia navalha de ouro"
-                class="w-[90%] m-auto ">
-        </figure>
+        class="bg-[url(/img/fundo.jpeg)] w-screen h-screen bg-center bg-cover bg-no-repeat flex flex-col items-center justify-around">
+        <Logo />
         <form
-            class="w-[90%] h-[40vh] bg-[#0303039c] flex flex-col justify-evenly items-center rounded-4xl md:w-[50%] md:h-[30vh]" @submit.prevent="handleLogin()">
+            class="w-[90%] h-[40vh] bg-[#0303039c] flex flex-col justify-evenly items-center rounded-4xl md:w-[50%] md:h-[30vh] lg:w-[50%] xl:w-[35%]" @submit.prevent="handleLogin()">
             <label for="user" class="w-[90%] h-[45px] border-2 rounded-md border-[#c6a765] overflow-hidden flex">
                 <span class="w-[15%]"><img src="/img/tesoura.png" alt="icone de uma tesoura"
                         class="w-[100%] bg-[#c6a765]"></span>
@@ -62,7 +65,7 @@ const handleLogin = async() => {
                         to="/signup">Cadastre-se</nuxt-link></button>
             </section>
         </form>
-        <MsgError :mensagem="errorMsg" />
-        <MsgSucess :mensagem="sucessMsg" />
+        <MsgError :mensagem="errorMsg" :state="!!errorMsg"/>
+        <MsgSucess :mensagem="sucessMsg" :state="!!sucessMsg"/>
     </main>
 </template>

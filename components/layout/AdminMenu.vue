@@ -64,13 +64,19 @@ const toggleAppointments = () => {
           <ul
             :class="[
               'w-screen h-[10vh] absolute left-0 bottom-[10vh] bg-[#202020] border-b-[.5px] border-[#fff] flex justify-center items-center',
-              serviceMenu ? 'block' : 'hidden',
+              serviceMenu ? 'flex justify-evenly' : 'hidden',
             ]"
           >
             <li class="flex flex-col h-full items-center justify-around">
               <span class="material-symbols-outlined">add_circle</span>
               <p class="uppercase text-[12px] font-semibold text-[#c6a765]">
                 Cadastrar
+              </p>
+            </li>
+            <li class="flex flex-col h-full items-center justify-around">
+              <span class="material-symbols-outlined">edit</span>
+              <p class="uppercase text-[12px] font-semibold text-[#c6a765]">
+                alterar
               </p>
             </li>
           </ul>

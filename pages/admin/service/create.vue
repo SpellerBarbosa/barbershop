@@ -5,7 +5,14 @@ import signupBtn from '~/components/forms/signupBtn.vue';
 import { ref } from 'vue';
 
 const service = ref<string>("");
-const price = ref<number>(0)
+const price = ref<string>("");
+const error = ref<string>("");
+
+const handleSubmitService = async() =>{
+    
+}
+
+
 </script>
 
 <template>
@@ -23,13 +30,14 @@ const price = ref<number>(0)
             place="digite o nome do serviço." 
             v-model="service"
             />
+            <span>{{ error }}</span>
             <InputLabel
             input_name="Valor"
             link="price"
             place="digte o valor do serviço"
-            type_input="number"
             v-model="price"
             />
+            <span>{{ error }}</span>
             <signupBtn btn-name="Cadastrar" />
         </form>
     </main>

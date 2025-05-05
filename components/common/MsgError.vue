@@ -1,8 +1,10 @@
 <script setup lang="ts">
-const props = defineProps({
-  mensagem: { type: String, required: true },
-  state: Boolean
-});
+type IMensagem = {
+    mensagem:String,
+    state: Boolean
+}
+
+const props = defineProps<IMensagem>();
 </script>
 
 <template>

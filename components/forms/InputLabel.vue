@@ -9,7 +9,7 @@ const props = defineProps({
     required: true,
   },
   type_input: {
-    type: String,
+    type: String || Number,
     default: "text",
   },
   place: {
@@ -21,7 +21,7 @@ const props = defineProps({
     default: false
   },
   modelValue:{
-    type: String,
+    type: [String, Number],
     required: true
   }
 });
@@ -29,7 +29,7 @@ const props = defineProps({
 const inputType = props.type_input || "text";
 
 const emit = defineEmits<{
-  (e: "update:modelValue", value: string): void;
+  (e: "update:modelValue", value: string | number | undefined): void;
 }>();
 
 const updateValue = (event: Event) => {

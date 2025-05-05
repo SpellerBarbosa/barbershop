@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
 @theme{
-    --breakpoint-sm: 30rem
+    --breakpoint-sm: 30rem;
+    --font-bodoni: 'Bodoni Moda', sanserif;
 }

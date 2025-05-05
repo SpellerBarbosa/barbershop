@@ -1,11 +1,12 @@
-import mongoose, { Document, Schema } from "mongoose";
+import mongoose, {Types, Document, Schema } from "mongoose";
 
 export enum UseRole{
   USER = 'user',
   ADMIN = 'admin'
 }
 
-interface IUser extends Document {
+export interface IUser extends Document {
+  _id: Types.ObjectId
   name: string;
   email: string;
   user: string;

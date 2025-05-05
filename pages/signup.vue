@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import InputLabel from "~/components/forms/InputLabel.vue";
 import signupBtn from "~/components/forms/signupBtn.vue";
+import Menu from "~/components/layout/SiteMenu.vue";
 import Logo from "~/components/layout/Logo.vue";
 import { ref } from "vue";
 import MsgError from "~/components/common/MsgError.vue";
@@ -109,20 +110,55 @@ const handlerSignup = async () => {
 </script>
 
 <template>
+  <Menu />
   <main
-    class="w-screen h-screen bg-[url(/img/fundo.jpeg)] bg-cover bg-center bg-no-repeat flex flex-col items-center justify-center">
+    class="w-screen h-screen bg-[url(/img/fundo.jpeg)] bg-cover bg-center bg-no-repeat flex flex-col items-center justify-center"
+  >
     <Logo />
     <form
       class="w-[95%] h-[60vh] bg-[#000000b2] rounded-2xl grid place-items-center md:w-[70%] md:h-[50vh] lg:h-[60vh] lg:w-[50%] xl:w-[40%]"
-      @submit.prevent="handlerSignup()">
-      <InputLabel link="name" place="Digite seu nome" input_name="Digite seu nome" v-model="name" />
-      <InputLabel link="email" place="email@email.com" input_name="Digite seu email" :state="isValid" v-model="email" />
-      <InputLabel link="user" place="digite seu usuario" input_name="Digite um nome de usuario" v-model="user" />
-      <InputLabel link="password" place="**********" input_name="Digite sua senha" type_input="password"
-        v-model="password" :state="isMatch" />
-      <InputLabel link="confirm-password" place="**********" input_name="confirme sua senha" type_input="password"
-        v-model="confirmPasword" :state="isMatch" />
-      <signupBtn btn-name="Cadastrar" btn-type="submit" :is-submitting="isSubmitting" />
+      @submit.prevent="handlerSignup()"
+    >
+      <InputLabel
+        link="name"
+        place="Digite seu nome"
+        input_name="Digite seu nome"
+        v-model="name"
+      />
+      <InputLabel
+        link="email"
+        place="email@email.com"
+        input_name="Digite seu email"
+        :state="isValid"
+        v-model="email"
+      />
+      <InputLabel
+        link="user"
+        place="digite seu usuario"
+        input_name="Digite um nome de usuario"
+        v-model="user"
+      />
+      <InputLabel
+        link="password"
+        place="**********"
+        input_name="Digite sua senha"
+        type_input="password"
+        v-model="password"
+        :state="isMatch"
+      />
+      <InputLabel
+        link="confirm-password"
+        place="**********"
+        input_name="confirme sua senha"
+        type_input="password"
+        v-model="confirmPasword"
+        :state="isMatch"
+      />
+      <signupBtn
+        btn-name="Cadastrar"
+        btn-type="submit"
+        :is-submitting="isSubmitting"
+      />
     </form>
     <MsgError :mensagem="errorMsg" :state="!!errorMsg" />
     <MsgSucess :mensagem="sucessMsg" :state="!!sucessMsg" />

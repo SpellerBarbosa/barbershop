@@ -3,13 +3,19 @@ import InputLabel from '~/components/forms/InputLabel.vue';
 import AdminMenu from '~/components/layout/AdminMenu.vue';
 import signupBtn from '~/components/forms/signupBtn.vue';
 import { ref } from 'vue';
+import clearMessage  from '../../../utils/clearMessage';
 
 const service = ref<string>("");
 const price = ref<string>("");
-const error = ref<string>("");
+const msgError = ref<string>("");
 
-const handleSubmitService = async() =>{
-    
+
+
+const handleSubmitService = async () =>{
+    if(!service.value){
+        msgError.value = "Preencha o campo serviço.";
+        clearMessage(msgError)
+    }
 }
 
 
@@ -23,22 +29,22 @@ const handleSubmitService = async() =>{
             <h3 class="text-xl font-bodoni font-bold tracking-wide text-[#c6a765] capitalize">Barbearia navalha de ouro</h3>
         </section>
 
-        <form class="w-[90%] h-[80vh] flex flex-col items-center justify-center">
+        <form class="w-[90%] h-[80vh] flex flex-col items-center justify-center" @submit.prevent="handleSubmitService" >
             <InputLabel 
             input_name="serviço" 
             link="service" 
             place="digite o nome do serviço." 
             v-model="service"
             />
-            <span>{{ error }}</span>
+            <span>{{ msgError }}</span>
             <InputLabel
             input_name="Valor"
             link="price"
             place="digte o valor do serviço"
             v-model="price"
             />
-            <span>{{ error }}</span>
-            <signupBtn btn-name="Cadastrar" />
+            <span>{{ msgError }}</span>
+            <signupBtn btn-type="submit" btn-name="Cadastrar" />
         </form>
     </main>
 </template>

@@ -1,6 +1,6 @@
 import { getCookie } from "#imports";
-import jwt from 'jsonwebtoken';
-
+import jwt, { JwtPayload } from 'jsonwebtoken';
+import type { Payload } from "~/utils/types";
 
 export default defineEventHandler(async(event)=>{
     const token = getCookie(event, 'token');
@@ -15,7 +15,24 @@ export default defineEventHandler(async(event)=>{
             return sendRedirect(event, '/login');
         }
 
-        jwt.verify(token, secret);
+       const decoded = jwt.verify(token, secret) as JwtPayload;
+
+       if(typeof decoded !== 'object' || !decoded.userRole){
+         throw new Error("Token malformado.")
+       }
+
+       const user = decoded as Payload
+
+       if(user.userRole === 'user'){
+            return sendRedirect(event, '/client/user')
+       }
+
+       if(user.userRole ==="admin"){
+        return sendRedirect(event, '/admin/dashboard')
+       }
+
+       return sendRedirect(event, '/login')
+
     } catch (error: any) {
        return sendRedirect(event, '/login')
     }

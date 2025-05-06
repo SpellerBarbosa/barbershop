@@ -1,6 +1,6 @@
 <script setup lang="ts">
 type IMensagem = {
-    mensagem:String,
+    mensagem:String | undefined,
     state: Boolean
 }
 

@@ -11,3 +11,10 @@ export interface Payload{
     userRole: string,
     userUser: string
 }
+
+export interface IError{
+    service: string,
+    price: string,
+    request: string,
+    verify: string
+}

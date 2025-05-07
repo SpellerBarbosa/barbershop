@@ -1,5 +1,5 @@
-import connectToDB from '../utils/connectToDB';
-import Service from '../models/servicesSchema';
+import connectToDB from '../../utils/connectToDB';
+import Service from '../../models/servicesSchema';
 
 export default defineEventHandler(async (event) =>{
     await connectToDB();

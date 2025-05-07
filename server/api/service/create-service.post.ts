@@ -1,5 +1,5 @@
-import Service from '../models/servicesSchema';
-import connectToDB from '../utils/connectToDB';
+import Service from '../../models/servicesSchema';
+import connectToDB from '../../utils/connectToDB';
 
 export default defineEventHandler(async (event) => {
     const body = await readBody(event);

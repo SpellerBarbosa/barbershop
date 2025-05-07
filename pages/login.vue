@@ -24,7 +24,7 @@ const handleLogin = async () => {
   }
 
   try {
-    const response = await axios.post("/api/login", {
+    const response = await axios.post("/api/auth/login", {
       user: user.value.toLowerCase().trim(),
       password: password.value.trim(),
     });

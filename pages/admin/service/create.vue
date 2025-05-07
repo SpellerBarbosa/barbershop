@@ -58,7 +58,7 @@ const handleSubmitService = async () => {
   isSubmitting.value = true;
   
   try {
-      const response = await api.post("/create-service", {
+      const response = await api.post("/service/create-service", {
           service: service.value.toLowerCase().trim(),
           price: parsedPrice,
           userId: perfil.userId,

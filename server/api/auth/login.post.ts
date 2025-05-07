@@ -1,6 +1,6 @@
-import User, { IUser } from "../models/userSchema";
-import connectToDB from "../utils/connectToDB";
-import { comparePassword } from "../utils/bcrypt";
+import User, { IUser } from "../../models/userSchema";
+import connectToDB from "../../utils/connectToDB";
+import { comparePassword } from "../../utils/bcrypt";
 import { setCookie } from "#imports";
 import  jwt  from "jsonwebtoken";
 

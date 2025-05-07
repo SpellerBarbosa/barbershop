@@ -55,7 +55,7 @@ const handlerSignup = async () => {
   isSubmitting.value = true;
 
   try {
-    const response = await axios.post("/api/signup", {
+    const response = await axios.post("/api/auth/signup", {
       name: name.value.toLowerCase().trim(),
       email: email.value.toLowerCase().trim(),
       user: user.value.toLowerCase().trim(),

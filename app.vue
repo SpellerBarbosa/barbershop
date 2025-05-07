@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import usePerfilStore from './store/usePerfilStore';
+import useServiceStore from './store/useServiceStore';
 import { onMounted } from 'vue';
 
-const perfil = usePerfilStore()
+const perfil = usePerfilStore();
+const services = useServiceStore()
 
 onMounted(async() =>{
-  await perfil.fetchProfile()
+  await perfil.fetchProfile();
 })
 
 </script>

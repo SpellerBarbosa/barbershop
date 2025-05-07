@@ -25,7 +25,7 @@ const usePerfilStore = defineStore('perfil',{
 
             try {
 
-                const response = await api.get('/profile',{
+                const response = await api.get('/user/profile',{
                     withCredentials: true
                 });
 

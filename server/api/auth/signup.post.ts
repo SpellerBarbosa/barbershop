@@ -1,6 +1,6 @@
-import connectToDB from "../utils/connectToDB";
-import User from "../models/userSchema";
-import { hashPassword } from "../utils/bcrypt";
+import connectToDB from "../../utils/connectToDB";
+import User from "../../models/userSchema";
+import { hashPassword } from "../../utils/bcrypt";
 
 export default defineEventHandler(async (event) => {
     await connectToDB();

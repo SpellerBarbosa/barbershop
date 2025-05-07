@@ -17,10 +17,10 @@ const usePerfilStore = defineStore('perfil',{
     getters:{
         isAdm: (state) => state.user?.userRole === 'admin',
         isUser: (state) => state.user?.userUser === 'user',
-        userId: (state) => state.user?.userId
+        userId: (state) => state.user?.userId 
     },
     actions:{
-        async fectProfile(){
+        async fetchProfile(){
             this.loading = true
 
             try {
@@ -32,7 +32,6 @@ const usePerfilStore = defineStore('perfil',{
                 const data = await response.data;
 
                 this.user = data
-
             } catch (error: any) {
                 this.erro = error.message
             }finally{

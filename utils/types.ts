@@ -18,3 +18,12 @@ export interface IError{
     request: string,
     verify: string
 }
+
+export interface Service{
+    _id: string,
+    service: string,
+    price: number,
+    userId: string,
+    createAt: string,
+    updated: string
+}

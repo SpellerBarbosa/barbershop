@@ -1,9 +1,11 @@
 import { getCookie } from "#imports";
-import jwt, { decode } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 
 export default defineEventHandler(async(event)=>{
+
     const token = getCookie(event, 'token');
     const secret: string | undefined = process.env.SECRET;
+  
 
     if(!secret){
         throw new Error("A variavel de ambiente SECRET não foi fornecida.")
@@ -18,6 +20,7 @@ export default defineEventHandler(async(event)=>{
     try {
 
         const decoded = jwt.verify(token, secret) as jwt.JwtPayload;
+
         return{
             userId: decoded.userId,
             userName: decoded.userName,

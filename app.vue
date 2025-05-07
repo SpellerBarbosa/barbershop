@@ -4,7 +4,6 @@ import useServiceStore from './store/useServiceStore';
 import { onMounted } from 'vue';
 
 const perfil = usePerfilStore();
-const services = useServiceStore()
 
 onMounted(async() =>{
   await perfil.fetchProfile();

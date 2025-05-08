@@ -14,7 +14,7 @@ const services = service.services
             <ul v-for="(service, index) in services" :key="index">
                 <li>{{ service.service }}</li>
                 <li>{{ service.price }}</li>
-                <button><nuxt-link :to="`/admin/service/service-edit/${service._id}`">Editar</nuxt-link></button>
+                <button><nuxt-link :to="`/admin/service-edit/${service._id}`">Editar</nuxt-link></button>
             </ul>
         </section>
     </main>

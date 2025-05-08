@@ -1,11 +1,11 @@
 import { getRouterParam } from "#imports";
 import connectToDB from "../../../utils/connectToDB";
-import Service from "~/server/models/servicesSchema";
+import Service, { IService } from "~/server/models/servicesSchema";
 
 export default defineEventHandler(async (event) =>{
     await connectToDB();
     
-    const id  = getRouterParam(event, '_id');
+    const  id   = getRouterParam(event, 'id');    
 
     if(!id){
         throw createError({
@@ -27,6 +27,8 @@ export default defineEventHandler(async (event) =>{
         return{ service }
     } catch (error: any) {
         if(error.statusCode) throw error;
+
+        console.log(error)
 
         throw createError({
             statusCode: 500,

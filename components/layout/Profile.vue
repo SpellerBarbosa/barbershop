@@ -20,20 +20,20 @@ const handleChange = (event: Event) => {
   }
 };
 
-onMounted(() => {
-  watchEffect(async () => {
-    if(!user.value){
-      try {
-      const response = await axios.get("/api/profile");
+// onMounted(() => {
+//   watchEffect(async () => {
+//     if(!user.value){
+//       try {
+//       const response = await axios.get("/api/profile");
 
-      const data = response.data;
+//       const data = response.data;
 
-      user.value = data.userName;
-      console.log(data);
-    } catch (error) {}
-    }
-  });
-});
+//       user.value = data.userName;
+//       console.log(data);
+//     } catch (error) {}
+//     }
+//   });
+// });
 </script>
 
 <template>

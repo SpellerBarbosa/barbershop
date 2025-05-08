@@ -1,0 +1,73 @@
+[
+    {
+      "_id": "663b1234abcde001",
+      "cliente": "João Silva",
+      "servico": "Corte de cabelo",
+      "data": "2025-05-08T10:00:00.000Z",
+      "status": "pendente"
+    },
+    {
+      "_id": "663b1234abcde002",
+      "cliente": "Maria Oliveira",
+      "servico": "Barba completa",
+      "data": "2025-05-07T15:30:00.000Z",
+      "status": "concluido"
+    },
+    {
+      "_id": "663b1234abcde003",
+      "cliente": "Carlos Souza",
+      "servico": "Corte + Barba",
+      "data": "2025-05-06T14:00:00.000Z",
+      "status": "cancelado"
+    },
+    {
+      "_id": "663b1234abcde004",
+      "cliente": "Ana Paula",
+      "servico": "Sobrancelha",
+      "data": "2025-05-09T11:00:00.000Z",
+      "status": "pendente"
+    },
+    {
+      "_id": "663b1234abcde005",
+      "cliente": "Ricardo Mendes",
+      "servico": "Corte de cabelo",
+      "data": "2025-05-05T13:00:00.000Z",
+      "status": "concluido"
+    },
+    {
+      "_id": "663b1234abcde006",
+      "cliente": "Luciana Castro",
+      "servico": "Barba simples",
+      "data": "2025-05-10T09:30:00.000Z",
+      "status": "pendente"
+    },
+    {
+      "_id": "663b1234abcde007",
+      "cliente": "Tiago Lima",
+      "servico": "Corte degradê",
+      "data": "2025-05-04T16:00:00.000Z",
+      "status": "cancelado"
+    },
+    {
+      "_id": "663b1234abcde008",
+      "cliente": "Fernanda Alves",
+      "servico": "Corte feminino",
+      "data": "2025-05-03T14:45:00.000Z",
+      "status": "concluido"
+    },
+    {
+      "_id": "663b1234abcde009",
+      "cliente": "Bruno Rocha",
+      "servico": "Corte + sobrancelha",
+      "data": "2025-05-08T17:00:00.000Z",
+      "status": "pendente"
+    },
+    {
+      "_id": "663b1234abcde010",
+      "cliente": "Patrícia Gomes",
+      "servico": "Barba e massagem facial",
+      "data": "2025-05-02T12:00:00.000Z",
+      "status": "cancelado"
+    }
+  ]
+  

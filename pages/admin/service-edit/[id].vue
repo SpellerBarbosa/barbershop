@@ -12,14 +12,12 @@ const serviceData = ref({
     price: 0,
 });
 
-console.log(id);
 
 onMounted(async () => {
     const response = await api.get(`/service/edit/${id}`);
 
     serviceData.value.service = response.data.service.service;
     serviceData.value.price = response.data.service.price;
-    console.log(response.data);
 });
 </script>
 <template>

@@ -3,7 +3,27 @@ import data from "../../../utils/data.json";
 import AdminMenu from "~/components/layout/AdminMenu.vue";
 import { ref } from "vue";
 
-const solicitacoes = data.filter((pendente) => pendente.status === "pendente");
+const today = new Date().toISOString().split("T")[0];
+const date  = ref<string>(today)
+const solicitacoes = data.map(solicitacao => ({
+  ...solicitacao,
+  data: new Date(solicitacao.data)
+}))
+
+const requestsDay = computed(()=>{
+  const dateSistem = new Date();
+  const dateDay = date.value ? new Date(`${date.value}T00:00:00`).toLocaleDateString('pt-BR') : dateSistem.toLocaleDateString('pt-BR')
+
+  return solicitacoes.filter((solicitacao) =>{
+    const dateRequest = solicitacao.data.toLocaleDateString('pt-BR');
+
+    return solicitacao.status === 'pendente' && dateRequest === dateDay
+  })
+})
+
+
+console.log(date.value)
+
 </script>
 <template>
   <AdminMenu />
@@ -13,29 +33,34 @@ const solicitacoes = data.filter((pendente) => pendente.status === "pendente");
     <article class="w-[80%] h-[20%] grid place-items-center">
       <h1 class="text-2xl text-[#c6a765] uppercase text-center font-bodoni tracking-[3px] font-bold">Agendamentos pendentes</h1>
     </article>
-    <section class="w-[90%] h-[80%] flex flex-col gap-4">
+    <section class="w-[90%] h-[80%] flex flex-col items-center gap-4">
+      <label for="date" class="text-[#c6a765] w-[80%] flex justify-between m-8">
+        <span class="text-2xl font-bold text-center">Data</span>
+        <input type="date" class="bg-[#c6a765] text-black" id="date" v-model="date" :min="today">
+      </label>
+
       <ul
-        v-for="(solicitacao, index) in solicitacoes"
+        v-for="(requestDay, index) in requestsDay"
         :key="index"
         class="w-[95%] h-[180px] rounded-2xl grid grid-rows-10 grid-cols-14 bg-[#202020]"
       >
         <li
           class="w-full row-start-2 col-start-1 row-span-2 col-span-7 text-2xl text-[#f1deb2] font-semibold tracking-[1.5px] grid place-items-center"
         >
-          {{ solicitacao.cliente }}
+          {{ requestDay.cliente }}
         </li>
         <li
           class="row-start-5 col-start-2 grid place-items-center font-semibold text-[16px] text-[#c6a675] row-span-2 col-span-7 uppercase text-balance"
         >
-          {{ solicitacao.servico }}
+          {{ requestDay.servico }}
         </li>
         <li
           class="row-start-2 row-span-2 col-start-10 col-span-4 grid place-items-center tracking-wider text-center rounded-2xl bg-[#c6a765] font-semibold uppercase text-sm"
         >
-          {{ solicitacao.status }}
+          {{ requestDay.status }}
         </li>
-        <li class="hidden">
-          {{ new Date(solicitacao.data).toLocaleDateString("pt-BR") }}
+        <li class="text-[#c6a765] col-start-9 row-start-5 row-span-2 font-bold flex items-center">
+          {{ new Date(requestDay.data).toLocaleDateString("pt-BR") }}
         </li>
         <li class="row-start-8 row-span-10 col-span-full flex justify-evenly">
           <div class="flex items-center gap-2">

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import data from "../../../utils/data.json";
-import AdminMenu from "~/components/layout/AdminMenu.vue";
+import AdminMenu from "~/components/layout/admin/AdminMenu.vue";
 import { ref } from "vue";
 
 const solicitacoes = data.filter((pendente) => pendente.status === "cancelado");
@@ -35,7 +35,7 @@ const solicitacoes = data.filter((pendente) => pendente.status === "cancelado");
         >
           {{ solicitacao.status }}
         </li>
-        <li class="hidden">
+        <li class="text-[#c6a765] col-start-9 row-start-5 row-span-2 font-bold flex items-center">
           {{ new Date(solicitacao.data).toLocaleDateString("pt-BR") }}
         </li>
       </ul>

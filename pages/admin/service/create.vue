@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import InputLabel from "~/components/forms/InputLabel.vue";
-import AdminMenu from "~/components/layout/AdminMenu.vue";
+import AdminMenu from "~/components/layout/admin/AdminMenu.vue";
 import signupBtn from "~/components/forms/signupBtn.vue";
 import clearErrors from "~/utils/clearErrors";
 import usePerfilStore from "~/store/usePerfilStore";

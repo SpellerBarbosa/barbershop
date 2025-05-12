@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Menu from '~/components/layout/SiteMenu.vue';
+import Menu from '~/components/common/SiteMenu.vue';
 </script>
 
 <template>

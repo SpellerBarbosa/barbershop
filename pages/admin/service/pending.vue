@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import data from "../../../utils/data.json";
-import AdminMenu from "~/components/layout/AdminMenu.vue";
+import AdminMenu from "~/components/layout/admin/AdminMenu.vue";
 import { ref } from "vue";
 
 const today = new Date().toISOString().split("T")[0];

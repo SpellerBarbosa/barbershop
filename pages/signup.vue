@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import InputLabel from "~/components/forms/InputLabel.vue";
 import signupBtn from "~/components/forms/signupBtn.vue";
-import Menu from "~/components/layout/SiteMenu.vue";
-import Logo from "~/components/layout/Logo.vue";
+import Menu from "~/components/common/SiteMenu.vue";
+import Logo from "~/components/common/Logo.vue";
 import { ref } from "vue";
 import MsgError from "~/components/common/MsgError.vue";
 import MsgSucess from "~/components/common/MsgSucess.vue";

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import useServiceStore from '~/store/useServiceStore';
-import AdminMenu from '~/components/layout/AdminMenu.vue';
+import AdminMenu from '~/components/layout/admin/AdminMenu.vue';
 
 const service = useServiceStore();
 const services = service.services;

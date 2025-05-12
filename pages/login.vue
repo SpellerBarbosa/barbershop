@@ -3,8 +3,8 @@ import axios from "axios";
 import { ref } from "vue";
 import MsgError from "~/components/common/MsgError.vue";
 import MsgSucess from "~/components/common/MsgSucess.vue";
-import Logo from "~/components/layout/Logo.vue";
-import Menu from "~/components/layout/SiteMenu.vue";
+import Logo from "~/components/common/Logo.vue";
+import Menu from "~/components/common/SiteMenu.vue";
 import clearMessage from "~/utils/clearMessage";
 import { useRouter } from "vue-router";
 

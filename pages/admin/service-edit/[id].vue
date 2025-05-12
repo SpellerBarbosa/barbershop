@@ -3,7 +3,7 @@ import { useRoute } from 'vue-router';
 import { onMounted } from 'vue';
 import { api } from '~/store/usePerfilStore';
 import { ref } from 'vue';
-import AdminMenu from '~/components/layout/AdminMenu.vue';
+import AdminMenu from '~/components/layout/admin/AdminMenu.vue';
 
 const route = useRoute();
 const id = route.params.id;

@@ -75,7 +75,7 @@ const toggleAppointments = () => {
             </li>
             <li class="flex flex-col h-full items-center justify-around">
               <span class="material-symbols-outlined">list</span>
-              <p class="uppercase text-[12px] font-semibold text-[#c6a765] text-center">
+              <p class="uppercase text-[12px] font-semibold text-[#c6a765] text-centerr">
                 Serviços<br>Cadastrados
               </p>
             </li>

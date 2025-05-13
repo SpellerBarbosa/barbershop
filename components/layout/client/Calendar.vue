@@ -7,7 +7,7 @@ const date: Date = new Date();
 const month: number = date.getMonth();
 const year: number = date.getFullYear();
 const today: number = date.getDate();
-const daysOfMonth: number = generateDays(month, year);
+const daysOfMonth: number[] = generateDays(month, year);
 const monthName: string = generetaNameOfMonths(month)
 const emit = defineEmits<{
     (e: 'select', date: string): void

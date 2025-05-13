@@ -1,4 +1,5 @@
-const generateDays = (month: number, year: number): number => {
+const generateDays = (month: number, year: number): number[] => {
+  let arrayDays: number [] = []
   const daysOfMonth = {
     month30Days: 30,
     month31Days: 31,
@@ -6,20 +7,27 @@ const generateDays = (month: number, year: number): number => {
     leapFebruary: 29,
   };
 
+  let totalDays = daysOfMonth.month31Days
+
   // Caso para o mês de fevereiro
   if (month === 1) {
-    return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0
-      ? daysOfMonth.leapFebruary
-      : daysOfMonth.february;
+    const isLeap = (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0
+    totalDays = isLeap ? daysOfMonth.leapFebruary : daysOfMonth.february
   }
 
   // Meses com 30 dias
   if ([3, 5, 8, 10].includes(month)) {
-    return daysOfMonth.month30Days;
+    totalDays = daysOfMonth.month30Days
   }
 
   // Meses com 31 dias
-  return daysOfMonth.month31Days;
+ 
+
+  for (let day = 1; day < totalDays; day++) {
+      arrayDays.push(day)
+  }
+
+  return arrayDays;
 };
 
 export default generateDays;

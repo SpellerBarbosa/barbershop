@@ -4,13 +4,20 @@ import { api } from "~/store/usePerfilStore";
 import MsgError from "~/components/common/MsgError.vue";
 import type { IError } from "../../../utils/types";
 import type { IService } from "~/server/models/servicesSchema";
+import usePerfilStore from "~/store/usePerfilStore";
+import clearErros  from '~/utils/clearErrors';
+import clearMessage from '~/utils/clearMessage';
+import MsgSucess from "~/components/common/MsgSucess.vue";
 
 const selectedDate = ref<string>("");
 const avaliableHours = ref<string[]>([]);
 const servicesAvaliable = ref<IService[]>([]);
-const erro = ref<Partial<IError>>({});
-const serviceSelected = ref<string>("");
-const selectedHour = ref<string>("")
+const serviceSelected = ref<string>();
+const selectedHour = ref<string>("");
+const usePerfil = usePerfilStore();
+const errorMessage = ref<Partial<IError>>({});
+const sucessMessage = ref("");
+
 const serviceSelectedData = computed(() => {
   return servicesAvaliable.value.find(
     (s) => s.service === serviceSelected.value
@@ -24,6 +31,7 @@ watch(selectedDate, async (newDate) => {
     const response = await api.get("/service/avaliable-hours", {
       params: {
         date: newDate,
+        time: selectedHour
       },
     });
     const data = await response.data;
@@ -34,24 +42,75 @@ watch(selectedDate, async (newDate) => {
     servicesAvaliable.value = dataService.services;
   } catch (error: any) {
     if (error.response.status >= 400) {
-      return (erro.value.verify = error.message);
+      errorMessage.value.verify = error.message;
+      clearErros(errorMessage)
+      return 
     }
 
     if (error.response.status >= 500) {
-      return (erro.value.verify = error.message);
+      errorMessage.value.verify = error.message;
+      clearErros(errorMessage)
+      return 
     }
 
     console.error(error);
 
-    erro.value.verify =
+    errorMessage.value.verify =
       "Falha ao fazer a requisição tente novamente mais tarde.";
+    clearErros(errorMessage)
   }
 });
 
 watch(serviceSelected, (newValue) => {
-  console.log(newValue);
-  console.log(serviceSelectedData.value);
+
 });
+
+
+const handleSubmitNewAppointment = async() =>{
+  const price = Number(serviceSelectedData.value?.price);
+  const userId = usePerfil.userId
+
+  console.log(price)
+
+  if(!userId){
+    errorMessage.value.verify = "Faça login para autenticação do seu ID"
+    return
+  }
+
+  if(isNaN(price)){
+    errorMessage.value.verify = "Preço deve ser um numero."
+    return
+  }
+
+
+  if(!selectedDate.value || !serviceSelected.value || !selectedHour.value ){
+    errorMessage.value.verify = "Para o agendamento todos os dados devem ser enviados"
+    return 
+  }
+
+  try {
+    
+    const response  = await api.post('/service/appointments',{
+      date: selectedDate.value,
+      service: serviceSelected.value.toLowerCase().trim(),
+      time: selectedHour.value,
+      price: price,
+      userId: userId
+    })
+
+    const data = await response.data;
+
+    sucessMessage.value = data.message;
+    clearMessage(sucessMessage)
+
+  } catch (error: any) {
+    if(error.status >= 400 && error.status < 500){
+
+    }
+  }
+
+}
+
 </script>
 
 <template>
@@ -81,7 +140,7 @@ watch(serviceSelected, (newValue) => {
           v-model="serviceSelected"
           class="uppercase border-[#c6a765] border-1 p-2 text-center w-[90%] cursor-pointer"
         >
-          <option value="" disable selected>Selecione um serviço</option>
+          <option disable selected >Selecione um serviço</option>
           <option
             :value="service.service"
             v-for="(service, index) in servicesAvaliable"
@@ -123,6 +182,8 @@ watch(serviceSelected, (newValue) => {
           />
         </label>
         <button
+          type="button"
+          @click.prevent="handleSubmitNewAppointment()"
           :class="[
             'w-[150px] h-[50px] rounded-3xl bg-[#c6a765] text-[#202020] font-bold uppercase border-black tracking-wider',
             serviceSelectedData?.price
@@ -134,6 +195,7 @@ watch(serviceSelected, (newValue) => {
         </button>
       </div>
     </form>
-    <MsgError :mensagem="erro.verify" :state="!!erro.verify" />
+    <MsgError :mensagem="errorMessage.verify" :state="!!errorMessage.verify" />
+    <MsgSucess :mensagem="sucessMessage" :state="!!sucessMessage" />
   </section>
 </template>

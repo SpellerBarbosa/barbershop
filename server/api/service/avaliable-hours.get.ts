@@ -7,7 +7,11 @@ export default defineEventHandler(async (event) => {
   await connectToDB();
 
   const query = getQuery(event);
+  
   const dateString = query.date as string;
+  const time = query.time as string
+  console.log(time);
+  
   if (!dateString) {
     createError({
       statusCode: 400,

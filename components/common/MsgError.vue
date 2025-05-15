@@ -10,7 +10,7 @@ const props = defineProps<IMensagem>();
 <template>
   <span
     :class="[
-      'bg-[#ff000098] w-[50px] h-[50px] rounded-full grid place-items-center font-semibold tracking-wider text-white uppercase text-xs absolute top-10 left-[50%] -translate-x-[50%] opacity-0',
+      'bg-[#ff000098] w-[50px] h-[50px] rounded-full grid place-items-center font-semibold tracking-wider text-white uppercase text-xs absolute top-10 left-[50%] -translate-x-[50%] opacity-0 text-center',
       state ? 'transition-all duration-1000 w-[80%] opacity-100 md:w-[50%] lg:w-[25%]' : 'transition-all duration-500 w-[50px] h-[50px]',
     ]"
   >

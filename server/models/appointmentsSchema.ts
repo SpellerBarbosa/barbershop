@@ -10,7 +10,7 @@ interface IAppointments extends Document {
 
 const AppointmentsSchema = new Schema({
   date: {
-    type: String,
+    type: Date,
     required: true,
   },
   service: {

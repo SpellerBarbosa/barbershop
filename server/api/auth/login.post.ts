@@ -54,7 +54,7 @@ export default defineEventHandler(async (event) => {
         return {message: 'Login Efetuado com sucesso'}
 
     } catch (error: any) {
-        console.log(error);
+        console.error(error);
 
         if(error.statusCode) throw error;
 

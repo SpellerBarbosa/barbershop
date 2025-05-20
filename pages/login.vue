@@ -7,14 +7,17 @@ import Logo from "~/components/common/Logo.vue";
 import Menu from "~/components/common/SiteMenu.vue";
 import clearMessage from "~/utils/clearMessage";
 import { useRouter } from "vue-router";
+import { api } from "~/store/usePerfilStore";
+import usePerfilStore from "~/store/usePerfilStore";
 
 const user = ref<string>("");
 const password = ref<string>("");
 const errorMsg = ref<string>("");
 const sucessMsg = ref<string>("");
 const cookie = useCookie("token");
-const router = useRouter();
 const isSubmiting = ref<boolean>(false);
+const router = useRouter();
+const perfil = usePerfilStore()
 
 const handleLogin = async () => {
   if (!user.value || !password.value) {
@@ -31,13 +34,31 @@ const handleLogin = async () => {
 
     const data = response.data;
     cookie.value = data.token;
-    sucessMsg.value = data.message;
     user.value = "";
     password.value = "";
     isSubmiting.value = true;
-    clearMessage(sucessMsg);
-  } catch (error: any) {
 
+    const secure = await api.get('/auth/secure');
+    sucessMsg.value = secure.data.message
+    await perfil.fetchProfile()
+    clearMessage(sucessMsg)
+
+    if(secure.data.role === 'user'){
+      setTimeout(() => {
+        router.push('/client/dashboard');
+      }, 3500);
+      return
+    }
+
+    if(secure.data.role === 'admin'){
+      setTimeout(() => {
+        router.push('/admin/dashboard')
+      }, 3500);
+      return
+    }
+
+
+  } catch (error: any) {
     if (error.response.status >= 400) {
       errorMsg.value = error.response.data.message;
       clearMessage(errorMsg);

@@ -1,10 +1,11 @@
 import mongoose, {Types, Document, Schema } from "mongoose";
 
-interface IAppointments extends Document {
+export interface IAppointments extends Document {
   date: Date;
   service: string;
   time: string;
   price: number;
+  status: string;
   userId:Types.ObjectId;
 }
 
@@ -24,6 +25,10 @@ const AppointmentsSchema = new Schema({
   price:{
     type: Number,
     required: true,
+  },
+  status:{
+    type: String,
+    default: 'pendente'
   },
   userId:{
     type: String,

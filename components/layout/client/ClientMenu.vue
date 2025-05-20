@@ -1,7 +1,12 @@
 <script setup lang="ts">
-import { ref, type Ref } from "vue";
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+import usePerfilStore from "~/store/usePerfilStore";
+
 const serviceMenu = ref<boolean>(false);
 const appoitmetsMenu = ref<boolean>(false);
+const useProfile = usePerfilStore();
+const router = useRouter();
 
 const toggleService = () => {
   serviceMenu.value = !serviceMenu.value;
@@ -16,43 +21,37 @@ const toggleAppointments = () => {
     serviceMenu.value = false;
   }
 };
+
+const logout = async () => {
+  await $fetch("/api/auth/logout");
+  useProfile.user = null;
+  router.push("/login");
+};
+
+const goToDasboard = () => {
+  if (useProfile.isUser) return router.push("/client/dashboard");
+};
+
+const goToBook = () => {
+  if (useProfile.isUser) return router.push("/client/service/book");
+};
+
+const goToMyAppointments = () => {
+  if (useProfile.isUser) return router.push("/client/service/my-appointments");
+};
 </script>
 
 <template>
   <header
     class="w-screen h-[10vh] fixed bottom-0 bg-[#202020] flex justify-center items-center"
   >
-    <!-- <button class="w-[50px] h-[50px] grid place-items-center hidden" @click="toggle()">
-      <span
-        :class="[
-          'w-[100%] h-0.5 block bg-[#c6a765]',
-          stateMenu
-            ? 'trasition duration-500 origin-center rotate-45 translate-y-[16px]'
-            : 'transition duration-500',
-        ]"
-      ></span>
-      <span
-        :class="[
-          'w-[100%] h-0.5 block bg-[#c6a765]',
-          stateMenu
-            ? 'opacity-0 transition duration-500'
-            : 'transition duration-500',
-        ]"
-      ></span>
-      <span
-        :class="[
-          'w-[100%] h-0.5 block bg-[#c6a765]',
-          stateMenu
-            ? 'transition duration-500 origin-center -rotate-45 -translate-y-[16px]'
-            : 'transition duration-500',
-        ]"
-      ></span>
-    </button> -->
     <nav class="w-[100%] h-[100%] flex items-center justify-evenly">
       <ul class="w-full h-full flex items-center justify-evenly">
-        <li class="flex flex-col h-full justify-around">
+        <li class="flex flex-col h-full justify-around" @click="goToDasboard()">
           <span class="material-symbols-outlined">home</span>
-          <p class="uppercase text-[10px] font-semibold text-[#c6a765]">inicio</p>
+          <p class="uppercase text-[10px] font-semibold text-[#c6a765]">
+            inicio
+          </p>
         </li>
 
         <li
@@ -67,7 +66,10 @@ const toggleAppointments = () => {
               serviceMenu ? 'flex justify-evenly' : 'hidden',
             ]"
           >
-            <li class="flex flex-col h-full items-center justify-around">
+            <li
+              class="flex flex-col h-full items-center justify-around"
+              @click="goToBook()"
+            >
               <span class="material-symbols-outlined">edit_calendar</span>
               <p class="uppercase text-[12px] font-semibold text-[#c6a765]">
                 Agendar
@@ -78,7 +80,11 @@ const toggleAppointments = () => {
 
         <li
           class="flex flex-col h-full justify-around cursor-pointer"
-          @click="toggleAppointments()"
+          @click="
+            () => {
+              toggleAppointments();
+            }
+          "
         >
           <span class="material-symbols-outlined"> book_online</span>
           <p class="uppercase text-[10px] font-semibold text-[#c6a765]">
@@ -90,27 +96,23 @@ const toggleAppointments = () => {
               appoitmetsMenu ? 'flex justify-evenly' : 'hidden',
             ]"
           >
-            <li class="flex flex-col h-full items-center justify-around">
-              <span class="material-symbols-outlined">check_circle</span>
-              <p class="uppercase text-[12px] font-semibold text-[#c6a765]">
-                concluidos
-              </p>
-            </li>
-            <li class="flex flex-col h-full items-center justify-around">
-              <span class="material-symbols-outlined">hourglass_empty</span>
-              <p class="uppercase text-[12px] font-semibold text-[#c6a765]">
-                pendentes
-              </p>
-            </li>
-            <li class="flex flex-col h-full items-center justify-around">
-              <span class="material-symbols-outlined">cancel</span>
-              <p class="uppercase text-[12px] font-semibold text-[#c6a765]">
-                cancelados
+            <li
+              class="flex flex-col h-full items-center justify-around"
+              @click="goToMyAppointments()"
+            >
+              <span class="material-symbols-outlined">event</span>
+              <p
+                class="uppercase text-[12px] font-semibold text-[#c6a765] text-center"
+              >
+                Meus<br />Agendamentos
               </p>
             </li>
           </ul>
         </li>
-        <li class="flex flex-col h-full justify-around">
+        <li
+          class="flex flex-col h-full justify-around cursor-pointer"
+          @click="logout()"
+        >
           <span class="material-symbols-outlined">logout</span>
           <p class="uppercase text-[10px] font-semibold text-[#c6a765]">sair</p>
         </li>

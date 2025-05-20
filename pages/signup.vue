@@ -73,7 +73,7 @@ const handlerSignup = async () => {
       return;
     }
   } catch (error: any) {
-    console.log("Erro capturado:", error);
+    console.error("Erro capturado:", error);
 
     if (error.response) {
       const status = error.response.status;

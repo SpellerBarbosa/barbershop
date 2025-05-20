@@ -68,8 +68,6 @@ const handleSubmitNewAppointment = async () => {
     const price = Number(serviceSelectedData.value?.price);
     const userId = usePerfil.userId;
 
-    console.log(price);
-
     if (!userId) {
         errorMessage.value.verify = 'Faça login para autenticação do seu ID';
         return;
@@ -99,6 +97,7 @@ const handleSubmitNewAppointment = async () => {
 
         sucessMessage.value = data.message;
 
+        selectedDate.value = ""
         serviceSelected.value = '';
         selectedHour.value = '';
         clearMessage(sucessMessage);
@@ -116,7 +115,7 @@ const handleSubmitNewAppointment = async () => {
         >
             Esolha um dia para agendar seu horario
         </h1>
-        <Calendar @select="selectedDate = $event" />
+        <Calendar @select="selectedDate = $event" :width="300"/>
         <form
             :class="[
                 'w-screen  h-[30vh] grid place-items-center opacity-0',
@@ -127,7 +126,7 @@ const handleSubmitNewAppointment = async () => {
         >
             <div
                 :class="[
-                    'w-[80%] h-[80%] bg-[#202020] flex flex-col items-center justify-evenly rounded-4xl text-[#c6a765] uppercase',
+                    'w-[85%] h-[95%] bg-[#202020] flex flex-col items-center justify-evenly rounded-4xl text-[#c6a765] uppercase',
                 ]"
             >
                 <select

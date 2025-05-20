@@ -16,7 +16,7 @@ const usePerfilStore = defineStore('perfil',{
 
     getters:{
         isAdm: (state) => state.user?.userRole === 'admin',
-        isUser: (state) => state.user?.userUser === 'user',
+        isUser: (state) => state.user?.userRole === 'user',
         userId: (state) => state.user?.userId 
     },
     actions:{

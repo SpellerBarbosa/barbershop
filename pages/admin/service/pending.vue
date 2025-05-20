@@ -21,9 +21,6 @@ const requestsDay = computed(()=>{
   })
 })
 
-
-console.log(date.value)
-
 </script>
 <template>
   <AdminMenu />
